@@ -16,17 +16,22 @@ volume = cast(interface, POINTER(IAudioEndpointVolume))
 
 userInput = input("Enter the target time: ")
 
+def loop():
+    for i in range(3):
+        playsound('sound.mp3')
+
 
 
 def Background():
     currentVolumeDb = volume.GetMasterVolumeLevel()
-    volume.SetMasterVolumeLevel(-10.0, None)
     print("Task started...")
     print(f"Alarm wil play at {userInput}")
     while True:
         time = datetime.datetime.now().strftime('%I:%M %p')
         if time == userInput:
-            playsound('sound.mp3')
+            volume.SetMasterVolumeLevel(-10.0, None)
+            loop()
+            break
         else:
             pass
 
